@@ -350,8 +350,9 @@ int MMC5883MACompass::_get(int i) {
  * Get Azimuth
  */
 int MMC5883MACompass::getAzimuth() {
-  float heading = atan2(getY(), -getX()) * 180.0 / PI;
+  float heading = atan2(getY(), getX()) * 180.0 / PI;
   heading += _magneticDeclinationDegrees;
+  if (heading < 0) heading += 360.0;
   return (int)heading % 360;
 }
 
